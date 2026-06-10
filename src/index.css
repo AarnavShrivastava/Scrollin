@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #faf8f5;
+    color: #2d2a26;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * { box-sizing: border-box; }
+
+  /* Quiet focus ring — accessible but unobtrusive */
+  :focus-visible {
+    outline: 2px solid #7b76f5;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer utilities {
+  /* Soft card — warm white, thin border, gentle shadow */
+  .card {
+    background: #ffffff;
+    border: 1px solid #e8e0d4;
+    border-radius: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.03);
+  }
+
+  .card-hover {
+    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .card-hover:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06);
+    transform: translateY(-2px);
+    border-color: #d4c9b8;
+  }
+
+  /* Inset card for nested sections */
+  .card-inset {
+    background: #f4f0ea;
+    border: 1px solid #e8e0d4;
+    border-radius: 12px;
+  }
+
+  /* Calm accent text */
+  .text-calm {
+    color: #6560e8;
+  }
+
+  /* Subtle section divider */
+  .divider {
+    border: none;
+    border-top: 1px solid #e8e0d4;
+  }
+
+  /* Pill badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #d4c9b8 transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar { width: 5px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: #d4c9b8; border-radius: 9999px; }
+}
