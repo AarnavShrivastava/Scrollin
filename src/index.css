@@ -15,11 +15,15 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  h1, h2, h3 {
+    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  }
+
   * { box-sizing: border-box; }
 
   /* Quiet focus ring — accessible but unobtrusive */
   :focus-visible {
-    outline: 2px solid #7b76f5;
+    outline: 2px solid #2962ad;
     outline-offset: 3px;
     border-radius: 6px;
   }
@@ -53,7 +57,7 @@
 
   /* Calm accent text */
   .text-calm {
-    color: #6560e8;
+    color: #2962ad;
   }
 
   /* Subtle section divider */

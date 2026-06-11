@@ -17,18 +17,31 @@ export default {
           800: '#4a3c30',
           900: '#332a20',
         },
-        // Calm accent — muted indigo
+        // Calm accent — dusty blue (matches Scrollin' Instagram palette)
         calm: {
-          50:  '#f0f0ff',
-          100: '#e4e3ff',
-          200: '#cccbff',
-          300: '#b0adff',
-          400: '#9490ff',
-          500: '#7b76f5',
-          600: '#6560e8',
-          700: '#534ed0',
-          800: '#4440a8',
-          900: '#3a3788',
+          50:  '#eff5fb',
+          100: '#dbeaf7',
+          200: '#b6d4f0',
+          300: '#83b5e6',
+          400: '#5497d8',
+          500: '#367cc8',
+          600: '#2962ad',
+          700: '#22508e',
+          800: '#1d4275',
+          900: '#183762',
+        },
+        // Bark — deep warm brown for dark sections (matches Instagram dark backgrounds)
+        bark: {
+          50:  '#faf5f0',
+          100: '#f3e9dc',
+          200: '#e5cfb5',
+          300: '#d2ae83',
+          400: '#ba8647',
+          500: '#a06523',
+          600: '#844d16',
+          700: '#673a0e',
+          800: '#4a2909',
+          900: '#2e1806',
         },
         // Sage — for positive / healthy states
         sage: {
@@ -60,6 +73,7 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
         serif: ['Georgia', 'Cambria', 'serif'],
+        display: ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in':   'fadeIn 0.6s ease forwards',

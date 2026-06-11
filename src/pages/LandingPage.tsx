@@ -13,39 +13,39 @@ function Nav({ onEnter }: { onEnter: () => void }) {
   }, []);
 
   return (
-    <header className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${scrolled ? 'bg-sand-50/95 backdrop-blur-md border-b border-sand-200 shadow-sm' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${scrolled ? 'bg-bark-900/95 backdrop-blur-md border-b border-bark-800 shadow-lg' : 'bg-transparent'}`}>
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#" className="flex items-center gap-2 group">
           <div className="w-8 h-8 rounded-xl bg-calm-600 flex items-center justify-center">
             <Scroll size={14} className="text-white" />
           </div>
-          <span className="font-semibold text-sand-900 text-base tracking-tight">Scrollin'</span>
+          <span className="font-display font-semibold text-white text-base tracking-tight">Scrollin'</span>
         </a>
 
         <nav className="hidden md:flex items-center gap-1">
           {[['Why it matters','#why'],['How it works','#how'],['Who we are','#who']].map(([label, href]) => (
-            <a key={label} href={href} className="px-3 py-1.5 text-sm text-sand-600 hover:text-sand-900 rounded-lg hover:bg-sand-100 transition-all">
+            <a key={label} href={href} className="px-3 py-1.5 text-sm text-sand-300 hover:text-white rounded-lg hover:bg-bark-800/70 transition-all">
               {label}
             </a>
           ))}
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
-          <button onClick={onEnter} className="text-sm text-sand-600 hover:text-sand-900 px-3 py-1.5 transition-colors">Sign in</button>
-          <button onClick={onEnter} className="text-sm font-medium px-4 py-2 rounded-xl bg-calm-600 text-white hover:bg-calm-700 transition-colors shadow-sm">
+          <button onClick={onEnter} className="text-sm text-sand-300 hover:text-white px-3 py-1.5 transition-colors">Sign in</button>
+          <button onClick={onEnter} className="text-sm font-medium px-4 py-2 rounded-xl bg-calm-600 text-white hover:bg-calm-500 transition-colors shadow-sm">
             Get started — free
           </button>
         </div>
 
-        <button className="md:hidden p-2 rounded-lg text-sand-600 hover:bg-sand-100 transition-all" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+        <button className="md:hidden p-2 rounded-lg text-sand-300 hover:bg-bark-800 transition-all" onClick={() => setOpen(!open)} aria-label="Toggle menu">
           {open ? <X size={20}/> : <Menu size={20}/>}
         </button>
       </div>
 
       {open && (
-        <div className="md:hidden bg-sand-50 border-t border-sand-200 px-6 py-4 flex flex-col gap-2">
+        <div className="md:hidden bg-bark-900 border-t border-bark-800 px-6 py-4 flex flex-col gap-2">
           {[['Why it matters','#why'],['How it works','#how'],['Who we are','#who']].map(([label, href]) => (
-            <a key={label} href={href} onClick={() => setOpen(false)} className="py-2.5 text-sm text-sand-700 border-b border-sand-100 last:border-0">
+            <a key={label} href={href} onClick={() => setOpen(false)} className="py-2.5 text-sm text-sand-300 border-b border-bark-800 last:border-0">
               {label}
             </a>
           ))}
@@ -86,34 +86,35 @@ function Reveal({ children, className = '', delay = 0 }: { children: React.React
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 function Hero({ onEnter }: { onEnter: () => void }) {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center pt-16 px-6 text-center relative overflow-hidden">
-      {/* Soft background shapes */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-calm-100/60 blur-[80px] pointer-events-none" />
-      <div className="absolute bottom-1/3 right-1/4 w-[300px] h-[300px] rounded-full bg-sage-100/50 blur-[60px] pointer-events-none" />
+    <section className="min-h-screen flex flex-col items-center justify-center pt-16 px-6 text-center relative overflow-hidden bg-bark-900">
+      {/* Atmospheric background glows */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] rounded-full bg-calm-800/25 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] rounded-full bg-bark-700/50 blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/5 w-[250px] h-[250px] rounded-full bg-calm-900/30 blur-[80px] pointer-events-none" />
 
       <div className="relative max-w-2xl mx-auto">
         {/* Eyebrow */}
         <div
-          className="inline-flex items-center gap-2 bg-calm-50 border border-calm-200 text-calm-700 text-xs font-medium px-4 py-2 rounded-full mb-8 opacity-0 animate-fade-in"
+          className="inline-flex items-center gap-2 bg-bark-800 border border-bark-700 text-sand-300 text-xs font-medium px-4 py-2 rounded-full mb-8 opacity-0 animate-fade-in"
           style={{ animationFillMode: 'forwards' }}
         >
-          <Heart size={12} className="text-blush-500" />
+          <Heart size={12} className="text-calm-400" />
           Student-led · nonprofit · free for all youth
         </div>
 
         {/* Headline */}
         <h1
-          className="text-4xl md:text-6xl font-semibold text-sand-900 leading-tight tracking-tight mb-6 opacity-0 animate-fade-up"
+          className="text-4xl md:text-6xl font-display font-bold text-white leading-tight tracking-tight mb-6 opacity-0 animate-fade-up"
           style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}
         >
           Feel more like{' '}
-          <em className="not-italic text-calm-600">yourself</em>
+          <em className="not-italic text-calm-400">yourself</em>
           {' '}online.
         </h1>
 
         {/* Sub */}
         <p
-          className="text-lg text-sand-600 leading-relaxed mb-10 opacity-0 animate-fade-up"
+          className="text-lg text-sand-400 leading-relaxed mb-10 opacity-0 animate-fade-up"
           style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}
         >
           Scrollin' helps young people understand their social media and gaming habits — gently, honestly, and without judgment — so they can build a digital life that actually feels good.
@@ -126,19 +127,19 @@ function Hero({ onEnter }: { onEnter: () => void }) {
         >
           <button
             onClick={onEnter}
-            className="group flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-calm-600 text-white font-medium text-sm hover:bg-calm-700 active:scale-95 transition-all shadow-sm"
+            className="group flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-calm-600 text-white font-medium text-sm hover:bg-calm-500 active:scale-95 transition-all shadow-lg shadow-calm-900/40"
           >
             Start for free
             <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
           </button>
-          <a href="#how" className="px-7 py-3.5 rounded-2xl text-sand-700 text-sm font-medium hover:bg-sand-100 transition-colors">
+          <a href="#how" className="px-7 py-3.5 rounded-2xl text-sand-300 text-sm font-medium border border-bark-700 hover:bg-bark-800 hover:text-white transition-all">
             See how it works
           </a>
         </div>
 
         {/* Trust line */}
         <p
-          className="mt-8 text-xs text-sand-400 opacity-0 animate-fade-up"
+          className="mt-8 text-xs text-sand-600 opacity-0 animate-fade-up"
           style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}
         >
           No ads · no data selling · no screen-time surveillance · 100% free
@@ -146,7 +147,7 @@ function Hero({ onEnter }: { onEnter: () => void }) {
       </div>
 
       {/* Scroll cue */}
-      <a href="#why" className="absolute bottom-8 flex flex-col items-center gap-1 text-sand-400 hover:text-sand-600 transition-colors">
+      <a href="#why" className="absolute bottom-8 flex flex-col items-center gap-1 text-sand-600 hover:text-sand-400 transition-colors">
         <span className="text-xs">Scroll to learn more</span>
         <ChevronDown size={16} className="animate-bounce" />
       </a>
@@ -167,7 +168,7 @@ function Why() {
       <div className="max-w-4xl mx-auto">
         <Reveal>
           <p className="text-xs font-semibold uppercase tracking-widest text-calm-600 mb-3">Why it matters</p>
-          <h2 className="text-3xl md:text-4xl font-semibold text-sand-900 leading-snug mb-6 max-w-xl">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-sand-900 leading-snug mb-6 max-w-xl">
             The internet wasn't designed with your wellbeing in mind.
           </h2>
           <p className="text-sand-600 leading-relaxed max-w-2xl mb-12">
@@ -237,7 +238,7 @@ function Features() {
       <div className="max-w-4xl mx-auto">
         <Reveal>
           <p className="text-xs font-semibold uppercase tracking-widest text-calm-600 mb-3">What Scrollin' offers</p>
-          <h2 className="text-3xl md:text-4xl font-semibold text-sand-900 leading-snug mb-12 max-w-xl">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-sand-900 leading-snug mb-12 max-w-xl">
             Tools that meet you where you are.
           </h2>
         </Reveal>
@@ -274,7 +275,7 @@ function HowItWorks() {
       <div className="max-w-4xl mx-auto">
         <Reveal>
           <p className="text-xs font-semibold uppercase tracking-widest text-calm-600 mb-3">How it works</p>
-          <h2 className="text-3xl md:text-4xl font-semibold text-sand-900 leading-snug mb-12 max-w-xl">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-sand-900 leading-snug mb-12 max-w-xl">
             Simple steps. Real change.
           </h2>
         </Reveal>
@@ -311,7 +312,7 @@ function WhoWeAre({ onEnter }: { onEnter: () => void }) {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <Reveal>
             <p className="text-xs font-semibold uppercase tracking-widest text-calm-600 mb-3">About us</p>
-            <h2 className="text-3xl md:text-4xl font-semibold text-sand-900 leading-snug mb-5">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-sand-900 leading-snug mb-5">
               Made by students, for students.
             </h2>
             <p className="text-sand-600 leading-relaxed mb-4">
@@ -353,23 +354,25 @@ function WhoWeAre({ onEnter }: { onEnter: () => void }) {
 // ─── Final CTA ────────────────────────────────────────────────────────────────
 function BottomCTA({ onEnter }: { onEnter: () => void }) {
   return (
-    <section className="py-20 px-6 bg-calm-600">
-      <div className="max-w-2xl mx-auto text-center">
+    <section className="py-20 px-6 bg-bark-900 relative overflow-hidden">
+      {/* Atmospheric glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full bg-calm-800/20 blur-[100px] pointer-events-none" />
+      <div className="max-w-2xl mx-auto text-center relative">
         <Reveal>
-          <h2 className="text-3xl md:text-4xl font-semibold text-white leading-snug mb-4">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white leading-snug mb-4">
             You don't have to figure this out alone.
           </h2>
-          <p className="text-calm-100 leading-relaxed mb-8">
+          <p className="text-sand-400 leading-relaxed mb-8">
             Scrollin' is free, private, and made by people who've been there too. Come as you are.
           </p>
           <button
             onClick={onEnter}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white text-calm-700 font-semibold text-sm hover:bg-sand-50 active:scale-95 transition-all"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-calm-600 text-white font-semibold text-sm hover:bg-calm-500 active:scale-95 transition-all shadow-lg shadow-calm-900/50"
           >
             Get started — it's free
             <ArrowRight size={14} />
           </button>
-          <p className="text-calm-200 text-xs mt-4">No account required to explore · No credit card ever</p>
+          <p className="text-sand-600 text-xs mt-4">No account required to explore · No credit card ever</p>
         </Reveal>
       </div>
     </section>
@@ -379,21 +382,21 @@ function BottomCTA({ onEnter }: { onEnter: () => void }) {
 // ─── Footer ───────────────────────────────────────────────────────────────────
 function Footer() {
   return (
-    <footer className="py-10 px-6 bg-sand-100 border-t border-sand-200">
+    <footer className="py-10 px-6 bg-bark-900 border-t border-bark-800">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-xl bg-calm-600 flex items-center justify-center">
             <Scroll size={13} className="text-white" />
           </div>
-          <span className="font-semibold text-sand-800 text-sm">Scrollin'</span>
-          <span className="text-sand-400 text-xs ml-2">· 501(c)(3) nonprofit</span>
+          <span className="font-display font-semibold text-white text-sm">Scrollin'</span>
+          <span className="text-sand-600 text-xs ml-2">· 501(c)(3) nonprofit</span>
         </div>
         <nav className="flex flex-wrap gap-x-5 gap-y-2">
           {['Privacy policy','Safe messaging','Accessibility','Volunteer','Contact'].map(l => (
-            <a key={l} href="#" className="text-xs text-sand-500 hover:text-sand-800 transition-colors">{l}</a>
+            <a key={l} href="#" className="text-xs text-sand-500 hover:text-white transition-colors">{l}</a>
           ))}
         </nav>
-        <p className="text-xs text-sand-400">© {new Date().getFullYear()} Scrollin'. All rights reserved.</p>
+        <p className="text-xs text-sand-600">© {new Date().getFullYear()} Scrollin'. All rights reserved.</p>
       </div>
     </footer>
   );

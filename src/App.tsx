@@ -1,24 +1,24 @@
-import { useState } from 'react';
-import { Scroll, LayoutDashboard, BookOpen, ChevronLeft } from 'lucide-react';
-import LandingPage    from './pages/LandingPage';
-import OnboardingPage from './pages/OnboardingPage';
-import DashboardPage  from './pages/DashboardPage';
-import ReflectionPage from './pages/ReflectionPage';
-import { isOnboardingDone } from './store/userStore';
+import { useState } from "react";
+import { Scroll, LayoutDashboard, BookOpen, ChevronLeft } from "lucide-react";
+import LandingPage from "./pages/LandingPage";
+import OnboardingPage from "./pages/OnboardingPage";
+import DashboardPage from "./pages/DashboardPage";
+import ReflectionPage from "./pages/ReflectionPage";
+import { isOnboardingDone } from "./store/userStore";
 
-type Page = 'landing' | 'onboarding' | 'app';
+type Page = "landing" | "onboarding" | "app";
 
 // ─── Determine the initial page synchronously from localStorage ──────────────
 // We read localStorage once at module load so there's no flash of the wrong page.
 function getInitialPage(): Page {
   // If the user is already in the app (they clicked a nav link that set page=app),
   // we restore that. Otherwise start at landing.
-  return 'landing';
+  return "landing";
 }
 
 // ─── App shell (post-onboarding authenticated view) ──────────────────────────
 function AppShell({ onExit }: { onExit: () => void }) {
-  const [page, setPage] = useState<'dashboard' | 'reflection'>('dashboard');
+  const [page, setPage] = useState<"dashboard" | "reflection">("dashboard");
 
   return (
     <div className="min-h-screen bg-sand-50 flex flex-col">
@@ -29,7 +29,9 @@ function AppShell({ onExit }: { onExit: () => void }) {
           <div className="w-7 h-7 rounded-lg bg-calm-600 flex items-center justify-center">
             <Scroll size={13} className="text-white" />
           </div>
-          <span className="font-semibold text-sand-900 text-sm tracking-tight">Scrollin'</span>
+          <span className="font-semibold text-sand-900 text-sm tracking-tight">
+            Scrollin'
+          </span>
         </div>
 
         {/* Nav tabs */}
@@ -37,14 +39,14 @@ function AppShell({ onExit }: { onExit: () => void }) {
           <NavTab
             icon={<LayoutDashboard size={15} />}
             label="Dashboard"
-            active={page === 'dashboard'}
-            onClick={() => setPage('dashboard')}
+            active={page === "dashboard"}
+            onClick={() => setPage("dashboard")}
           />
           <NavTab
             icon={<BookOpen size={15} />}
             label="Reflect"
-            active={page === 'reflection'}
-            onClick={() => setPage('reflection')}
+            active={page === "reflection"}
+            onClick={() => setPage("reflection")}
           />
         </div>
 
@@ -61,25 +63,31 @@ function AppShell({ onExit }: { onExit: () => void }) {
 
       {/* Page content */}
       <main className="flex-1">
-        {page === 'dashboard'  && <DashboardPage />}
-        {page === 'reflection' && <ReflectionPage />}
+        {page === "dashboard" && <DashboardPage />}
+        {page === "reflection" && <ReflectionPage />}
       </main>
     </div>
   );
 }
 
 function NavTab({
-  icon, label, active, onClick,
+  icon,
+  label,
+  active,
+  onClick,
 }: {
-  icon: React.ReactNode; label: string; active: boolean; onClick: () => void;
+  icon: React.ReactNode;
+  label: string;
+  active: boolean;
+  onClick: () => void;
 }) {
   return (
     <button
       onClick={onClick}
       className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm transition-all ${
         active
-          ? 'bg-calm-50 text-calm-700 font-medium border border-calm-200'
-          : 'text-sand-500 hover:text-sand-800 hover:bg-sand-100'
+          ? "bg-calm-50 text-calm-700 font-medium border border-calm-200"
+          : "text-sand-500 hover:text-sand-800 hover:bg-sand-100"
       }`}
     >
       {icon}
@@ -96,24 +104,20 @@ export default function App() {
   // Checks localStorage — returning users skip onboarding entirely.
   const handleEnterApp = () => {
     if (isOnboardingDone()) {
-      setPage('app');
+      setPage("app");
     } else {
-      setPage('onboarding');
+      setPage("onboarding");
     }
   };
 
-  if (page === 'landing') {
+  if (page === "landing") {
     return <LandingPage onEnter={handleEnterApp} />;
   }
 
-  if (page === 'onboarding') {
-    return (
-      <OnboardingPage
-        onComplete={() => setPage('app')}
-      />
-    );
+  if (page === "onboarding") {
+    return <OnboardingPage onComplete={() => setPage("app")} />;
   }
 
   // page === 'app'
-  return <AppShell onExit={() => setPage('landing')} />;
+  return <AppShell onExit={() => setPage("landing")} />;
 }
