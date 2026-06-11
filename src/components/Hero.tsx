@@ -1,137 +1,55 @@
-import { ArrowRight, Play, Scroll, Circle } from 'lucide-react';
-import { useEffect, useRef } from 'react';
-
-// Floating habit nodes — represent the kinds of patterns Scrollin' helps young
-// people recognize and reroute.
-function FloatingNode({
-  x, y, label, color, delay, status,
-}: {
-  x: string; y: string; label: string; color: string; delay: string;
-  status: 'done' | 'active' | 'pending';
-}) {
-  const statusColors = { done: 'bg-emerald-500', active: 'bg-violet-500', pending: 'bg-slate-600' };
-  return (
-    <div
-      className="absolute glass rounded-2xl px-4 py-3 flex items-center gap-3 shadow-2xl animate-float opacity-0 animate-fade-in"
-      style={{
-        left: x, top: y,
-        animationDelay: delay,
-        animationFillMode: 'forwards',
-        animationDuration: '6s, 0.8s',
-        animationName: 'float, fadeIn',
-      }}
-    >
-      <div className={`w-2.5 h-2.5 rounded-full ${statusColors[status]} shadow-lg`} />
-      <span className="text-xs font-medium text-white whitespace-nowrap">{label}</span>
-      <div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: color }}>
-        <Scroll size={10} className="text-white" />
-      </div>
-    </div>
-  );
-}
+import { ArrowRight, Leaf, Heart } from 'lucide-react';
 
 export default function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
-    resize();
-    window.addEventListener('resize', resize);
-
-    const particles: { x: number; y: number; vx: number; vy: number; r: number; a: number }[] = [];
-    for (let i = 0; i < 80; i++) {
-      particles.push({
-        x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
-        r: Math.random() * 1.5 + 0.3, a: Math.random() * 0.5 + 0.1,
-      });
-    }
-
-    let frame: number;
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((p) => {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0) p.x = canvas.width;  if (p.x > canvas.width)  p.x = 0;
-        if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(192, 132, 252, ${p.a})`;
-        ctx.fill();
-      });
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(168, 85, 247, ${0.15 * (1 - dist / 120)})`;
-            ctx.lineWidth = 0.6;
-            ctx.stroke();
-          }
-        }
-      }
-      frame = requestAnimationFrame(draw);
-    };
-    draw();
-    return () => { cancelAnimationFrame(frame); window.removeEventListener('resize', resize); };
-  }, []);
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-cream-100">
+      {/* Blob decorations */}
+      <svg viewBox="0 0 200 200" className="absolute -top-20 -left-32 w-80 h-80 text-blue-100 opacity-70 pointer-events-none" aria-hidden="true">
+        <path fill="currentColor" d="M44.3,-58.4C56.9,-50.6,66.5,-37.2,70.5,-22.3C74.5,-7.4,73,8.9,66.3,22.5C59.6,36.1,47.7,47,34.4,54.5C21.1,62,6.4,66.2,-8.2,65.3C-22.8,64.3,-37.3,58.1,-48.5,48.1C-59.7,38.1,-67.6,24.2,-69.3,9.6C-71,-5,-66.6,-20.3,-58.4,-33.4C-50.2,-46.5,-38.2,-57.3,-24.8,-63.9C-11.4,-70.5,3.4,-72.9,17.3,-70.1C31.2,-67.2,31.7,-66.2,44.3,-58.4Z" transform="translate(100 100)" />
+      </svg>
+      <svg viewBox="0 0 200 200" className="absolute -bottom-24 -right-24 w-96 h-96 text-pink-100 opacity-60 pointer-events-none" aria-hidden="true">
+        <path fill="currentColor" d="M44.3,-58.4C56.9,-50.6,66.5,-37.2,70.5,-22.3C74.5,-7.4,73,8.9,66.3,22.5C59.6,36.1,47.7,47,34.4,54.5C21.1,62,6.4,66.2,-8.2,65.3C-22.8,64.3,-37.3,58.1,-48.5,48.1C-59.7,38.1,-67.6,24.2,-69.3,9.6C-71,-5,-66.6,-20.3,-58.4,-33.4C-50.2,-46.5,-38.2,-57.3,-24.8,-63.9C-11.4,-70.5,3.4,-72.9,17.3,-70.1C31.2,-67.2,31.7,-66.2,44.3,-58.4Z" transform="translate(100 100)" />
+      </svg>
 
-      {/* Background orbs */}
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-violet-700/10 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-pink-700/10 blur-[100px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-purple-900/5 blur-[140px] pointer-events-none" />
+      {/* Dot grid */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-25"
+        style={{ backgroundImage: 'radial-gradient(circle, #92BAE0 1px, transparent 1px)', backgroundSize: '24px 24px' }}
+      />
 
-      {/* Floating habit nodes */}
-      <div className="absolute inset-0 pointer-events-none hidden lg:block">
-        <FloatingNode x="7%"  y="22%" label="Doom-scrolling loop"   color="rgba(168,85,247,0.8)"  delay="0s"    status="done"    />
-        <FloatingNode x="74%" y="14%" label="Gaming all night"       color="rgba(236,72,153,0.8)"  delay="0.4s"  status="active"  />
-        <FloatingNode x="81%" y="58%" label="Screen-free morning"    color="rgba(6,182,212,0.8)"   delay="0.8s"  status="pending" />
-        <FloatingNode x="5%"  y="63%" label="Healthy boundary set"   color="rgba(16,185,129,0.8)"  delay="1.2s"  status="done"    />
-        <FloatingNode x="59%" y="77%" label="IRL connection made"    color="rgba(168,85,247,0.8)"  delay="1.6s"  status="active"  />
-      </div>
+      {/* Botanical floats */}
+      <span className="absolute top-24 left-16 text-3xl opacity-40 animate-float select-none pointer-events-none" aria-hidden="true">🌿</span>
+      <span className="absolute top-32 right-20 text-2xl opacity-35 animate-sway select-none pointer-events-none" aria-hidden="true">🌸</span>
+      <span className="absolute bottom-32 left-24 text-2xl opacity-35 animate-float select-none pointer-events-none" style={{ animationDelay: '2s' }} aria-hidden="true">🍃</span>
+      <span className="absolute bottom-40 right-16 text-3xl opacity-30 animate-sway select-none pointer-events-none" style={{ animationDelay: '1s' }} aria-hidden="true">✿</span>
 
       {/* Main content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center">
-
+      <div className="relative z-10 max-w-2xl mx-auto px-6 text-center">
         {/* Badge */}
         <div
-          className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-8 opacity-0 animate-fade-up"
+          className="inline-flex items-center gap-2 bg-white border border-blue-200 text-blue-600 text-xs font-bold px-5 py-2 rounded-full mb-8 shadow-soft opacity-0 animate-fade-in"
           style={{ animationFillMode: 'forwards' }}
         >
-          <Circle size={6} className="fill-emerald-400 text-emerald-400 animate-pulse" />
-          <span className="text-xs font-medium text-slate-300">Student-led nonprofit · free for every young person</span>
-          <ArrowRight size={12} className="text-slate-500" />
+          <Heart size={12} className="text-pink-400 fill-pink-300" />
+          Student-led · nonprofit · free for every young person
         </div>
 
         {/* Headline */}
         <h1
-          className="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.05] mb-6 opacity-0 animate-fade-up"
+          className="text-5xl md:text-7xl font-extrabold tracking-tight text-navy-800 leading-tight mb-6 opacity-0 animate-fade-up"
           style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}
         >
-          Reclaim your feed.
-          <br className="hidden sm:block" />
-          <span className="text-gradient">Own your time.</span>
+          Feel more like{' '}
+          <em className="not-italic text-blue-500">yourself</em>
+          {' '}online.
         </h1>
 
         {/* Subheading */}
         <p
-          className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-10 opacity-0 animate-fade-up"
+          className="text-lg md:text-xl text-charcoal-600 max-w-xl mx-auto leading-relaxed mb-10 opacity-0 animate-fade-up font-medium"
           style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}
         >
-          Scrollin' is a student-led nonprofit that helps young people map their online habits, understand what drives unhealthy patterns, and build real strategies for a healthier digital life.
+          Scrollin' is a student-led nonprofit that helps young people understand their social media and gaming habits — and build a healthier digital life.
         </p>
 
         {/* CTA buttons */}
@@ -141,19 +59,16 @@ export default function Hero() {
         >
           <a
             href="#"
-            className="group flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-pink-600 text-white font-semibold text-base hover:opacity-95 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-xl shadow-violet-900/40 glow-purple"
+            className="group flex items-center gap-2 px-8 py-4 rounded-3xl bg-blue-500 text-white font-bold text-base hover:bg-blue-600 active:scale-95 transition-all shadow-soft"
           >
-            Start your journey — free
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
+            Start for free
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </a>
           <a
-            href="#"
-            className="group flex items-center gap-2 px-8 py-4 rounded-2xl glass text-white font-medium text-base hover:bg-white/[0.08] active:scale-95 transition-all duration-200"
+            href="#how-it-works"
+            className="group flex items-center gap-2 px-8 py-4 rounded-3xl text-charcoal-700 font-bold text-base hover:bg-cream-200 transition-all border border-cream-300"
           >
-            <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors duration-200">
-              <Play size={10} className="text-white fill-white ml-0.5" />
-            </div>
-            Watch our story
+            See how it works
           </a>
         </div>
 
@@ -163,27 +78,25 @@ export default function Hero() {
           style={{ animationDelay: '0.45s', animationFillMode: 'forwards' }}
         >
           <div className="flex -space-x-3">
-            {['bg-violet-500', 'bg-pink-500', 'bg-cyan-500', 'bg-emerald-500', 'bg-amber-500'].map((color, i) => (
+            {['bg-blue-400', 'bg-pink-400', 'bg-sage-400', 'bg-cream-400', 'bg-blue-300'].map((color, i) => (
               <div
                 key={i}
-                className={`w-9 h-9 rounded-full ${color} border-2 border-dark-900 flex items-center justify-center text-xs font-semibold text-white`}
+                className={`w-9 h-9 rounded-full ${color} border-2 border-cream-100 flex items-center justify-center text-xs font-bold text-white`}
               >
                 {String.fromCharCode(65 + i)}
               </div>
             ))}
           </div>
           <div className="text-left">
-            <div className="text-white font-semibold text-sm">3,200+ youth served so far</div>
-            <div className="text-slate-500 text-xs">across 40+ schools and community programs</div>
+            <div className="text-navy-800 font-bold text-sm">3,200+ youth served so far</div>
+            <div className="text-charcoal-500 text-xs font-semibold">across 40+ schools and community programs</div>
           </div>
-          <div className="hidden sm:block w-px h-10 bg-white/10" />
-          <div className="text-slate-400 text-sm">
+          <div className="hidden sm:block w-px h-10 bg-cream-300" />
+          <div className="text-charcoal-500 text-sm font-semibold">
             100% free &nbsp;·&nbsp; Student-run &nbsp;·&nbsp; No ads, ever
           </div>
         </div>
       </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#060612] to-transparent pointer-events-none" />
     </section>
   );
 }

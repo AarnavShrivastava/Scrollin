@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Scroll, LayoutDashboard, BookOpen, ChevronLeft } from 'lucide-react';
+import { LayoutDashboard, BookOpen, ChevronLeft, Leaf } from 'lucide-react';
 import LandingPage    from './pages/LandingPage';
 import OnboardingPage from './pages/OnboardingPage';
 import DashboardPage  from './pages/DashboardPage';
@@ -8,32 +8,28 @@ import { isOnboardingDone } from './store/userStore';
 
 type Page = 'landing' | 'onboarding' | 'app';
 
-// ─── Determine the initial page synchronously from localStorage ──────────────
-// We read localStorage once at module load so there's no flash of the wrong page.
 function getInitialPage(): Page {
-  // If the user is already in the app (they clicked a nav link that set page=app),
-  // we restore that. Otherwise start at landing.
   return 'landing';
 }
 
-// ─── App shell (post-onboarding authenticated view) ──────────────────────────
+// ─── App shell ────────────────────────────────────────────────────────────────
 function AppShell({ onExit }: { onExit: () => void }) {
   const [page, setPage] = useState<'dashboard' | 'reflection'>('dashboard');
 
   return (
-    <div className="min-h-screen bg-sand-50 flex flex-col">
+    <div className="min-h-screen bg-cream-100 flex flex-col">
       {/* Top nav */}
-      <nav className="bg-white border-b border-sand-200 px-6 h-14 flex items-center justify-between sticky top-0 z-30">
+      <nav className="bg-white border-b-2 border-powder-200 px-6 h-14 flex items-center justify-between sticky top-0 z-30 shadow-soft">
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-calm-600 flex items-center justify-center">
-            <Scroll size={13} className="text-white" />
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-2xl bg-powder-600 flex items-center justify-center">
+            <Leaf size={14} className="text-white" />
           </div>
-          <span className="font-semibold text-sand-900 text-sm tracking-tight">Scrollin'</span>
+          <span className="font-extrabold text-choco-800 text-sm tracking-tight">Scrollin'</span>
         </div>
 
         {/* Nav tabs */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
           <NavTab
             icon={<LayoutDashboard size={15} />}
             label="Dashboard"
@@ -48,18 +44,17 @@ function AppShell({ onExit }: { onExit: () => void }) {
           />
         </div>
 
-        {/* Exit back to landing */}
+        {/* Exit */}
         <button
           onClick={onExit}
-          className="flex items-center gap-1.5 text-xs text-sand-500 hover:text-sand-800 transition-colors px-3 py-2 rounded-lg hover:bg-sand-100"
+          className="flex items-center gap-1.5 text-xs text-steel-500 hover:text-choco-700 transition-colors px-3 py-2 rounded-xl hover:bg-cream-200"
           aria-label="Return to home"
         >
           <ChevronLeft size={13} />
-          <span className="hidden sm:inline">Home</span>
+          <span className="hidden sm:inline font-semibold">Home</span>
         </button>
       </nav>
 
-      {/* Page content */}
       <main className="flex-1">
         {page === 'dashboard'  && <DashboardPage />}
         {page === 'reflection' && <ReflectionPage />}
@@ -76,10 +71,10 @@ function NavTab({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm transition-all ${
+      className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-bold transition-all ${
         active
-          ? 'bg-calm-50 text-calm-700 font-medium border border-calm-200'
-          : 'text-sand-500 hover:text-sand-800 hover:bg-sand-100'
+          ? 'bg-powder-200 text-powder-700 border-2 border-powder-300'
+          : 'text-steel-500 hover:text-choco-700 hover:bg-cream-200'
       }`}
     >
       {icon}
@@ -88,12 +83,10 @@ function NavTab({
   );
 }
 
-// ─── Root ─────────────────────────────────────────────────────────────────────
+// ─── Root ──────────────────────────────────────────────────────────────────────
 export default function App() {
   const [page, setPage] = useState<Page>(getInitialPage);
 
-  // Called when the user clicks "Get started" on the landing page.
-  // Checks localStorage — returning users skip onboarding entirely.
   const handleEnterApp = () => {
     if (isOnboardingDone()) {
       setPage('app');
@@ -102,18 +95,7 @@ export default function App() {
     }
   };
 
-  if (page === 'landing') {
-    return <LandingPage onEnter={handleEnterApp} />;
-  }
-
-  if (page === 'onboarding') {
-    return (
-      <OnboardingPage
-        onComplete={() => setPage('app')}
-      />
-    );
-  }
-
-  // page === 'app'
+  if (page === 'landing')    return <LandingPage onEnter={handleEnterApp} />;
+  if (page === 'onboarding') return <OnboardingPage onComplete={() => setPage('app')} />;
   return <AppShell onExit={() => setPage('landing')} />;
 }

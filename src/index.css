@@ -1,84 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ── Brand token reference (from Scrollin' brand image) ─────────────────────
+   Cream background:   #F7F4E0
+   Powder blue fill:   #CCDDE8
+   Button blue:        #6192AE
+   Display text blue:  #8AAFC9
+   Body text blue:     #5580A2
+   Heading brown:      #3D1A12
+   Dark badge brown:   #5C2B1E
+──────────────────────────────────────────────────────────────────────────── */
+
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
-    background-color: #faf8f5;
-    color: #2d2a26;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #F7F4E0;   /* brand cream */
+    color: #4A2E22;              /* warm brown body text */
+    font-family: 'Nunito', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   * { box-sizing: border-box; }
 
-  /* Quiet focus ring — accessible but unobtrusive */
   :focus-visible {
-    outline: 2px solid #7b76f5;
+    outline: 2px solid #6192AE;
     outline-offset: 3px;
-    border-radius: 6px;
+    border-radius: 8px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito', system-ui, sans-serif;
+    color: #3D1A12;   /* deep chocolate heading color */
+    font-weight: 800;
   }
 }
 
 @layer utilities {
-  /* Soft card — warm white, thin border, gentle shadow */
+  /* ── Cards ── */
   .card {
-    background: #ffffff;
-    border: 1px solid #e8e0d4;
-    border-radius: 16px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.03);
+    background: #FFFFFF;
+    border: 1.5px solid #CCDDE8;
+    border-radius: 20px;
+    box-shadow: 0 1px 4px rgba(92,43,30,0.05), 0 4px 16px rgba(92,43,30,0.04);
   }
 
   .card-hover {
-    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
   }
-
   .card-hover:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06);
-    transform: translateY(-2px);
-    border-color: #d4c9b8;
+    box-shadow: 0 4px 14px rgba(124,166,192,0.25), 0 10px 30px rgba(124,166,192,0.15);
+    transform: translateY(-3px);
+    border-color: #8AAFC9;
   }
 
-  /* Inset card for nested sections */
+  /* Inset / nested card — uses cream background */
   .card-inset {
-    background: #f4f0ea;
-    border: 1px solid #e8e0d4;
-    border-radius: 12px;
+    background: #F7F4E0;
+    border: 1.5px solid #CCDDE8;
+    border-radius: 14px;
   }
 
-  /* Calm accent text */
-  .text-calm {
-    color: #6560e8;
-  }
-
-  /* Subtle section divider */
-  .divider {
+  /* Powder blue filled card — like the big circle in the image */
+  .card-powder {
+    background: #CCDDE8;
     border: none;
-    border-top: 1px solid #e8e0d4;
+    border-radius: 20px;
   }
 
-  /* Pill badge */
+  /* ── Badge ── */
   .badge {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-size: 0.68rem;
+    font-weight: 800;
     letter-spacing: 0.03em;
     padding: 3px 10px;
     border-radius: 999px;
   }
 
+  /* ── Section eyebrow label ── */
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6192AE;    /* button blue from image */
+  }
+
+  /* ── Notebook lines ── */
+  .bg-notebook {
+    background-color: #FEFEFE;
+    background-image: repeating-linear-gradient(
+      transparent, transparent 27px,
+      #CCDDE8 27px, #CCDDE8 28px
+    );
+    background-size: 100% 28px;
+  }
+
+  /* ── Dot pattern (the scattered circles from image) ── */
+  .bg-dot-powder {
+    background-image: radial-gradient(circle, #CCDDE8 1.5px, transparent 1.5px);
+    background-size: 22px 22px;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    border: none;
+    border-top: 1.5px solid #CCDDE8;
+  }
+
+  /* ── Scrollbar ── */
   .scrollbar-thin {
     scrollbar-width: thin;
-    scrollbar-color: #d4c9b8 transparent;
+    scrollbar-color: #CCDDE8 transparent;
   }
   .scrollbar-thin::-webkit-scrollbar { width: 5px; }
   .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
-  .scrollbar-thin::-webkit-scrollbar-thumb { background: #d4c9b8; border-radius: 9999px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #CCDDE8;
+    border-radius: 9999px;
+  }
+
+  /* ── Blob shapes ── */
+  .blob   { border-radius: 60% 40% 50% 50% / 40% 50% 60% 50%; }
+  .blob-2 { border-radius: 40% 60% 70% 30% / 50% 30% 70% 50%; }
+
+  /* ── Semantic text helpers ── */
+  .text-brand-heading  { color: #3D1A12; }   /* deep chocolate */
+  .text-brand-subhead  { color: #5C2B1E; }   /* medium brown  */
+  .text-brand-body     { color: #5580A2; }   /* steel blue body */
+  .text-brand-display  { color: #8AAFC9; }   /* light periwinkle (display only) */
+  .text-brand-btn      { color: #6192AE; }   /* button blue */
+  .text-brand-muted    { color: #7CA6C0; }   /* muted powder blue */
 }

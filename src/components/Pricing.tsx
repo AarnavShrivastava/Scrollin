@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { Check, Heart } from 'lucide-react';
 
-// Scrollin' is a nonprofit — "pricing" is really about how schools, districts,
-// and sponsors can partner with us to fund free access for youth.
 const tiers = [
   {
     name: 'Youth',
@@ -10,8 +8,10 @@ const tiers = [
     period: 'always',
     description: 'For any young person who wants to build a healthier relationship with their screen.',
     cta: 'Get started free',
-    ctaStyle: 'glass hover:bg-white/[0.08] text-white',
     highlighted: false,
+    cardBg: 'bg-cream-50',
+    cardBorder: 'border-cream-300',
+    btnStyle: 'bg-cream-200 text-navy-700 hover:bg-cream-300 border border-cream-400 font-bold',
     features: [
       'Full habit mapping canvas',
       'Weekly wellbeing check-ins',
@@ -25,10 +25,12 @@ const tiers = [
     name: 'School',
     price: '$0',
     period: 'per student',
-    description: 'Partner with us to bring Scrollin\' into your classrooms and counseling programs.',
+    description: "Partner with us to bring Scrollin' into your classrooms and counseling programs.",
     cta: 'Partner with us',
-    ctaStyle: 'bg-gradient-to-r from-violet-600 to-pink-600 text-white hover:opacity-95 shadow-xl shadow-violet-900/40 glow-purple',
     highlighted: true,
+    cardBg: 'bg-blue-50',
+    cardBorder: 'border-blue-300',
+    btnStyle: 'bg-blue-500 text-white hover:bg-blue-600 shadow-soft font-bold',
     features: [
       'Everything in Youth',
       'Counselor dashboard',
@@ -44,10 +46,12 @@ const tiers = [
     name: 'Sponsor',
     price: 'Donate',
     period: 'any amount',
-    description: 'Help fund free access for youth who need it most. All donations go directly to program delivery.',
+    description: 'Help fund free access for youth who need it most.',
     cta: 'Become a sponsor',
-    ctaStyle: 'glass hover:bg-white/[0.08] text-white',
     highlighted: false,
+    cardBg: 'bg-pink-50',
+    cardBorder: 'border-pink-200',
+    btnStyle: 'bg-pink-100 text-pink-700 hover:bg-pink-200 border border-pink-300 font-bold',
     features: [
       'Public sponsor recognition',
       'Impact report each quarter',
@@ -70,7 +74,7 @@ function TierCard({ tier, index }: { tier: (typeof tiers)[number]; index: number
         if (entry.isIntersecting) {
           el.style.transitionDelay = `${index * 100}ms`;
           el.classList.add('opacity-100', 'translate-y-0');
-          el.classList.remove('opacity-0', 'translate-y-8');
+          el.classList.remove('opacity-0', 'translate-y-6');
           observer.disconnect();
         }
       },
@@ -83,15 +87,13 @@ function TierCard({ tier, index }: { tier: (typeof tiers)[number]; index: number
   return (
     <div
       ref={ref}
-      className={`relative glass rounded-2xl p-8 flex flex-col gap-6 opacity-0 translate-y-8 transition-all duration-700 ease-out ${
-        tier.highlighted
-          ? 'border border-violet-500/40 scale-[1.03] shadow-2xl shadow-violet-900/30'
-          : 'hover:border-white/10'
+      className={`relative card rounded-3xl p-8 flex flex-col gap-5 opacity-0 translate-y-6 transition-all duration-700 ease-out ${tier.cardBg} border ${tier.cardBorder} ${
+        tier.highlighted ? 'ring-2 ring-blue-400 shadow-lifted scale-[1.03]' : 'card-hover'
       }`}
     >
       {tier.highlighted && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-          <div className="flex items-center gap-1.5 bg-gradient-to-r from-violet-600 to-pink-600 text-white text-xs font-semibold px-4 py-1.5 rounded-full shadow-lg shadow-violet-900/40">
+          <div className="flex items-center gap-1.5 bg-blue-500 text-white text-xs font-extrabold px-4 py-1.5 rounded-full shadow-soft">
             <Heart size={10} className="fill-white" />
             Most requested
           </div>
@@ -99,26 +101,26 @@ function TierCard({ tier, index }: { tier: (typeof tiers)[number]; index: number
       )}
 
       <div>
-        <h3 className="text-white font-bold text-xl mb-1">{tier.name}</h3>
-        <p className="text-slate-500 text-sm">{tier.description}</p>
+        <h3 className="text-navy-800 font-extrabold text-xl mb-1">{tier.name}</h3>
+        <p className="text-charcoal-500 text-sm font-medium">{tier.description}</p>
       </div>
 
       <div className="flex items-end gap-2">
-        <span className="text-5xl font-bold text-white tabular-nums">{tier.price}</span>
-        <span className="text-slate-500 text-sm mb-2">/ {tier.period}</span>
+        <span className="text-5xl font-extrabold text-navy-800 tabular-nums">{tier.price}</span>
+        <span className="text-charcoal-400 text-sm mb-2 font-semibold">/ {tier.period}</span>
       </div>
 
       <a
         href="#"
-        className={`text-center px-6 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 hover:scale-[1.02] active:scale-95 ${tier.ctaStyle}`}
+        className={`text-center px-6 py-3.5 rounded-2xl text-sm transition-all hover:scale-[1.02] active:scale-95 ${tier.btnStyle}`}
       >
         {tier.cta}
       </a>
 
       <ul className="flex flex-col gap-3">
         {tier.features.map((feature) => (
-          <li key={feature} className="flex items-center gap-3 text-sm text-slate-300">
-            <Check size={15} className="text-violet-400 flex-shrink-0" />
+          <li key={feature} className="flex items-center gap-3 text-sm text-charcoal-700 font-medium">
+            <Check size={15} className="text-sage-500 flex-shrink-0" />
             {feature}
           </li>
         ))}
@@ -137,7 +139,7 @@ export default function Pricing() {
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.add('opacity-100', 'translate-y-0');
-          el.classList.remove('opacity-0', 'translate-y-6');
+          el.classList.remove('opacity-0', 'translate-y-5');
           observer.disconnect();
         }
       },
@@ -148,23 +150,21 @@ export default function Pricing() {
   }, []);
 
   return (
-    <section id="get-involved" className="relative py-32 overflow-hidden">
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-violet-900/8 blur-[120px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="get-involved" className="relative py-24 px-6 overflow-hidden bg-cream-100">
+      <div className="max-w-5xl mx-auto">
         <div
           ref={headingRef}
-          className="text-center mb-12 opacity-0 translate-y-6 transition-all duration-700 ease-out"
+          className="text-center mb-12 opacity-0 translate-y-5 transition-all duration-700 ease-out"
         >
-          <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-6">
+          <div className="inline-flex items-center gap-2 bg-white border border-pink-200 rounded-full px-4 py-2 mb-6">
             <Heart size={12} className="text-pink-400" />
-            <span className="text-xs font-medium text-slate-400">Get involved</span>
+            <span className="text-xs font-bold text-charcoal-500">Get involved</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-navy-800 tracking-tight mb-4">
             Free for youth.{' '}
-            <span className="text-gradient">Powered by community.</span>
+            <span className="text-blue-500">Powered by community.</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-xl mx-auto">
+          <p className="text-charcoal-600 text-lg max-w-xl mx-auto font-medium">
             Scrollin' is funded entirely by school partnerships and individual sponsors — so every young person can access it at zero cost, forever.
           </p>
         </div>
@@ -175,8 +175,8 @@ export default function Pricing() {
           ))}
         </div>
 
-        <p className="text-center text-slate-600 text-sm mt-8">
-          Scrollin' is a registered 501(c)(3) nonprofit. All school partnerships are free for students. Sponsor funds go directly to program delivery.
+        <p className="text-center text-charcoal-500 text-sm mt-8 font-semibold">
+          🌿 Scrollin' is a registered 501(c)(3) nonprofit. All school partnerships are free for students.
         </p>
       </div>
     </section>

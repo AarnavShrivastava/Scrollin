@@ -1,47 +1,50 @@
 import { useEffect, useRef } from 'react';
-import { ScanSearch, GitBranch, Lightbulb, TrendingUp } from 'lucide-react';
 
 const steps = [
   {
     number: '01',
-    icon: ScanSearch,
     title: 'Reflect on your habits',
     description:
-      'Answer a short, judgment-free check-in about how you\'ve been spending time online. No app tracking, no screen-time surveillance — just honest self-reflection guided by thoughtful prompts.',
-    color: 'from-violet-600 to-purple-700',
-    accent: 'border-violet-500/30',
+      "Answer a short, judgment-free check-in about how you've been spending time online. No app tracking, no screen-time surveillance — just honest self-reflection guided by thoughtful prompts.",
+    emoji: '🌱',
+    bg: 'bg-blue-50',
+    border: 'border-blue-300',
+    accent: 'border-blue-200',
   },
   {
     number: '02',
-    icon: GitBranch,
     title: 'Map the connections',
     description:
-      'Use our interactive habit graph to draw the links between your online behaviors and how they affect your sleep, mood, and real-world relationships. Seeing the web makes the patterns hard to ignore.',
-    color: 'from-pink-600 to-rose-600',
-    accent: 'border-pink-500/30',
+      'Use our interactive habit graph to draw the links between your online behaviors and how they affect your sleep, mood, and real-world relationships.',
+    emoji: '🔍',
+    bg: 'bg-pink-50',
+    border: 'border-pink-300',
+    accent: 'border-pink-200',
   },
   {
     number: '03',
-    icon: Lightbulb,
     title: 'Build your strategy',
     description:
-      'Choose from a library of evidence-based micro-habits and peer-tested strategies. Set small, achievable goals — not cold turkey bans — and track what actually moves the needle for you.',
-    color: 'from-amber-500 to-orange-600',
-    accent: 'border-amber-500/30',
+      'Choose from evidence-based micro-habits and peer-tested strategies. Set small, achievable goals — not cold turkey bans — and track what actually moves the needle.',
+    emoji: '✏️',
+    bg: 'bg-sage-50',
+    border: 'border-sage-300',
+    accent: 'border-sage-200',
   },
   {
     number: '04',
-    icon: TrendingUp,
     title: 'Grow with your community',
     description:
-      'Share progress with a trusted peer group, join weekly facilitated sessions, and celebrate wins together. Lasting change is social — Scrollin\' gives you the people to do it with.',
-    color: 'from-emerald-500 to-teal-600',
-    accent: 'border-emerald-500/30',
+      "Share progress with a trusted peer group, join weekly facilitated sessions, and celebrate wins together. Lasting change is social — Scrollin' gives you the people to do it with.",
+    emoji: '🌻',
+    bg: 'bg-cream-100',
+    border: 'border-cream-400',
+    accent: 'border-cream-300',
   },
 ];
 
 function StepCard({
-  number, icon: Icon, title, description, color, accent, index, isLast,
+  number, title, description, emoji, bg, border, accent, index, isLast,
 }: (typeof steps)[number] & { index: number; isLast: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -53,7 +56,7 @@ function StepCard({
         if (entry.isIntersecting) {
           el.style.transitionDelay = `${index * 100}ms`;
           el.classList.add('opacity-100', 'translate-x-0');
-          el.classList.remove('opacity-0', '-translate-x-8');
+          el.classList.remove('opacity-0', '-translate-x-6');
           observer.disconnect();
         }
       },
@@ -66,23 +69,23 @@ function StepCard({
   return (
     <div className="relative flex gap-6">
       <div className="flex flex-col items-center">
-        <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center shadow-lg flex-shrink-0 z-10`}>
-          <Icon size={20} className="text-white" />
+        <div className={`w-12 h-12 rounded-2xl ${bg} border-2 ${border} flex items-center justify-center flex-shrink-0 z-10 text-xl`}>
+          {emoji}
         </div>
         {!isLast && (
-          <div className="w-px flex-1 mt-2 bg-gradient-to-b from-white/10 to-transparent min-h-[40px]" />
+          <div className="w-0.5 flex-1 mt-2 bg-cream-300 min-h-[40px]" />
         )}
       </div>
 
       <div
         ref={ref}
-        className={`glass rounded-2xl p-6 mb-6 border ${accent} flex-1 opacity-0 -translate-x-8 transition-all duration-700 ease-out`}
+        className={`card rounded-2xl p-5 mb-6 border ${accent} flex-1 opacity-0 -translate-x-6 transition-all duration-700 ease-out`}
       >
-        <div className="flex items-center gap-3 mb-3">
-          <span className="text-xs font-bold text-slate-600 tabular-nums">{number}</span>
-          <h3 className="text-white font-semibold text-lg">{title}</h3>
+        <div className="flex items-center gap-3 mb-2">
+          <span className="text-xs font-extrabold text-charcoal-400 tabular-nums">{number}</span>
+          <h3 className="text-navy-800 font-extrabold text-base">{title}</h3>
         </div>
-        <p className="text-slate-400 text-sm leading-relaxed">{description}</p>
+        <p className="text-charcoal-600 text-sm leading-relaxed font-medium">{description}</p>
       </div>
     </div>
   );
@@ -98,7 +101,7 @@ export default function HowItWorks() {
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.add('opacity-100', 'translate-y-0');
-          el.classList.remove('opacity-0', 'translate-y-6');
+          el.classList.remove('opacity-0', 'translate-y-5');
           observer.disconnect();
         }
       },
@@ -109,32 +112,30 @@ export default function HowItWorks() {
   }, []);
 
   return (
-    <section id="how-it-works" className="relative py-32 overflow-hidden">
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-pink-900/8 blur-[120px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+    <section id="how-it-works" className="relative py-24 px-6 overflow-hidden bg-white">
+      <div className="max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
 
           {/* Left: heading — sticky */}
           <div
             ref={headingRef}
-            className="lg:sticky lg:top-32 opacity-0 translate-y-6 transition-all duration-700 ease-out"
+            className="lg:sticky lg:top-32 opacity-0 translate-y-5 transition-all duration-700 ease-out"
           >
-            <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-6">
-              <span className="text-xs font-medium text-slate-400">How it works</span>
+            <div className="inline-flex items-center gap-2 bg-cream-100 border border-cream-300 rounded-full px-4 py-2 mb-6">
+              <span className="text-xs font-bold text-charcoal-500">How it works</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-navy-800 tracking-tight mb-6 leading-tight">
               From scrolling on autopilot{' '}
-              <span className="text-gradient">to scrolling with intention.</span>
+              <span className="text-blue-500">to scrolling with intention.</span>
             </h2>
-            <p className="text-slate-400 text-lg leading-relaxed mb-8">
-              Scrollin' doesn't shame you for being online. We help you understand your habits, find what's working against you, and choose something better — one small step at a time.
+            <p className="text-charcoal-600 text-lg leading-relaxed mb-8 font-medium">
+              Scrollin' doesn't shame you for being online. We help you understand your habits and choose something better — one small step at a time.
             </p>
             <a
               href="#"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-pink-600 text-white font-medium text-sm hover:opacity-90 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-lg shadow-violet-900/40"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-blue-500 text-white font-bold text-sm hover:bg-blue-600 active:scale-95 transition-all shadow-soft"
             >
-              Try it — totally free
+              Try it — totally free 🌱
             </a>
           </div>
 

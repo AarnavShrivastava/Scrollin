@@ -22,64 +22,54 @@ export default function CTA() {
   }, []);
 
   return (
-    <section className="py-24 px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-20 px-6">
+      <div className="max-w-3xl mx-auto">
         <div
           ref={ref}
-          className="relative rounded-3xl overflow-hidden opacity-0 scale-95 transition-all duration-700 ease-out"
+          className="relative rounded-4xl overflow-hidden opacity-0 scale-95 transition-all duration-700 ease-out bg-blue-500 p-12 text-center shadow-lifted"
         >
-          {/* Gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-violet-900/80 via-pink-900/50 to-purple-900/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          {/* Blob decorations */}
+          <svg viewBox="0 0 200 200" className="absolute -top-12 -left-12 w-48 h-48 text-blue-400 opacity-50 pointer-events-none" aria-hidden="true">
+            <path fill="currentColor" d="M44.3,-58.4C56.9,-50.6,66.5,-37.2,70.5,-22.3C74.5,-7.4,73,8.9,66.3,22.5C59.6,36.1,47.7,47,34.4,54.5C21.1,62,6.4,66.2,-8.2,65.3C-22.8,64.3,-37.3,58.1,-48.5,48.1C-59.7,38.1,-67.6,24.2,-69.3,9.6C-71,-5,-66.6,-20.3,-58.4,-33.4C-50.2,-46.5,-38.2,-57.3,-24.8,-63.9C-11.4,-70.5,3.4,-72.9,17.3,-70.1C31.2,-67.2,31.7,-66.2,44.3,-58.4Z" transform="translate(100 100)" />
+          </svg>
+          <svg viewBox="0 0 200 200" className="absolute -bottom-12 -right-12 w-48 h-48 text-blue-600 opacity-40 pointer-events-none" aria-hidden="true">
+            <path fill="currentColor" d="M44.3,-58.4C56.9,-50.6,66.5,-37.2,70.5,-22.3C74.5,-7.4,73,8.9,66.3,22.5C59.6,36.1,47.7,47,34.4,54.5C21.1,62,6.4,66.2,-8.2,65.3C-22.8,64.3,-37.3,58.1,-48.5,48.1C-59.7,38.1,-67.6,24.2,-69.3,9.6C-71,-5,-66.6,-20.3,-58.4,-33.4C-50.2,-46.5,-38.2,-57.3,-24.8,-63.9C-11.4,-70.5,3.4,-72.9,17.3,-70.1C31.2,-67.2,31.7,-66.2,44.3,-58.4Z" transform="translate(100 100)" />
+          </svg>
 
-          {/* Decorative orbs */}
-          <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-violet-600/20 blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-pink-600/20 blur-3xl" />
+          <span className="absolute top-6 right-8 text-2xl opacity-40 select-none pointer-events-none" aria-hidden="true">🌸</span>
+          <span className="absolute bottom-6 left-8 text-xl opacity-40 select-none pointer-events-none" aria-hidden="true">🌿</span>
 
-          {/* Grid pattern overlay */}
-          <div
-            className="absolute inset-0 opacity-[0.04]"
-            style={{
-              backgroundImage:
-                'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-              backgroundSize: '40px 40px',
-            }}
-          />
-
-          {/* Content */}
-          <div className="relative z-10 text-center px-8 py-20">
-            <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-8">
-              <Heart size={12} className="text-pink-300 fill-pink-300" />
-              <span className="text-xs font-medium text-slate-300">Free for every young person, always</span>
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-2 mb-8">
+              <Heart size={12} className="text-pink-200 fill-pink-200" />
+              <span className="text-xs font-bold text-white">Free for every young person, always</span>
             </div>
 
-            <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight mb-6 leading-tight">
-              Your feed doesn't have
-              <br />
-              <span className="text-gradient">to control you.</span>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-6 leading-tight">
+              Your feed doesn't have to control you.
             </h2>
 
-            <p className="text-slate-300 text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-              Join 3,200+ young people who've started mapping their habits, understanding their triggers, and building a digital life that actually works for them.
+            <p className="text-blue-100 text-lg max-w-xl mx-auto mb-10 leading-relaxed font-medium">
+              Join 3,200+ young people who've started mapping their habits and building a digital life that actually works for them.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="#"
-                className="group flex items-center gap-2 px-8 py-4 rounded-2xl bg-white text-slate-900 font-semibold text-base hover:bg-slate-100 hover:scale-[1.02] active:scale-95 transition-all duration-200 shadow-xl"
+                className="group flex items-center gap-2 px-8 py-4 rounded-3xl bg-white text-navy-800 font-extrabold text-base hover:bg-cream-100 hover:scale-[1.02] active:scale-95 transition-all shadow-soft"
               >
                 Start your journey — free
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
+                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <a
                 href="#"
-                className="flex items-center gap-2 px-8 py-4 rounded-2xl glass text-white font-medium text-base hover:bg-white/[0.1] active:scale-95 transition-all duration-200"
+                className="flex items-center gap-2 px-8 py-4 rounded-3xl bg-white/15 text-white font-bold text-base hover:bg-white/25 active:scale-95 transition-all"
               >
                 Bring Scrollin' to my school
               </a>
             </div>
 
-            <p className="text-slate-500 text-sm mt-8">
+            <p className="text-blue-200 text-sm mt-8 font-bold">
               No ads &nbsp;·&nbsp; No data selling &nbsp;·&nbsp; No shame &nbsp;·&nbsp; Student-run nonprofit
             </p>
           </div>
